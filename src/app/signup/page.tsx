@@ -2,13 +2,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import LoginForm from "./form";
 import api from "@/api";
 
-export default function Login() {
+export default function SignUp() {
   return (
     <main className="h-screen flex items-center justify-center">
       <Card className="my-auto mx-auto max-w-sm">
         <CardHeader>
-          <CardTitle className="text-2xl">Login Banco</CardTitle>
-          <CardDescription>Entre com seu email para acessar suas contas</CardDescription>
+          <CardTitle className="text-2xl">Cadastrar Usuario</CardTitle>
         </CardHeader>
         <CardContent>
           <LoginForm apiFn={api} />

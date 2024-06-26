@@ -26,11 +26,21 @@ const initialPaymentData = {
 
 export const PaymentForm = ({ accountList, apiFn }: Props) => {
   const [paymentData, setPaymentData] = useState<CreatePayment>(initialPaymentData);
+  const [file, setFile] = useState<File | null>(null);
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const submitData = await apiFn.payment.create(paymentData);
+    const formData = new FormData();
+    formData.append("account_id", paymentData.account_id);
+    formData.append("amount", paymentData.amount);
+    formData.append("description", paymentData.description);
+    if (file) {
+      formData.append("image", file);
+    }
+
+    const submitData = await apiFn.payment.create(formData);
+    console.log(submitData);
     if ("error" in submitData) {
       alert(submitData.message);
     } else {
@@ -90,7 +100,17 @@ export const PaymentForm = ({ accountList, apiFn }: Props) => {
             </div>
             <div className="grid w-full max-w-sm items-center gap-1.5">
               <Label htmlFor="picture">Comprovante</Label>
-              <Input disabled id="picture" type="file" accept=".jpg,.jpeg,.pdf,.gif" />
+              <Input
+                id="picture"
+                type="file"
+                accept=".jpg,.jpeg,.pdf,.gif"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    setFile(file);
+                  }
+                }}
+              />
             </div>
           </div>
           <div className="grid gap-3">

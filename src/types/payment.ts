@@ -11,5 +11,5 @@ export interface CreatePayment {
   account_id: string
   amount:string
   description:string
-  imageUrl?:string
+  image?:string
 }

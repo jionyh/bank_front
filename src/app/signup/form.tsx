@@ -20,24 +20,20 @@ export default function LoginForm({ apiFn }: Props) {
   const router = useRouter();
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
     setErrorMessage(undefined);
     setHaveError(false);
+    e.preventDefault();
     const email = emailRef.current?.value || "";
     const password = passwordRef.current?.value || "";
-    const loginUser = await signIn("credentials", {
-      redirect: false,
-      email,
-      password,
-      callbackUrl: `/`,
-    });
-    if (loginUser?.error && !loginUser.ok) {
-      setHaveError(true);
-      setErrorMessage(loginUser.error);
-    }
 
-    if (loginUser?.ok && !haveError) {
-      router.push("/");
+    const signup = await apiFn.user.signup({ email, password });
+
+    if ("error" in signup) {
+      setHaveError(true);
+      setErrorMessage(signup.message);
+    }
+    if ("id" in signup) {
+      router.push("/login");
     }
   };
 
@@ -46,7 +42,7 @@ export default function LoginForm({ apiFn }: Props) {
       <div className="grid gap-4">
         <div className="grid gap-2">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" ref={emailRef} placeholder="Entre com seu email" required />
+          <Input id="email" type="email" ref={emailRef} placeholder="" required />
         </div>
         <div className="grid gap-2">
           <div className="flex items-center">
@@ -55,19 +51,13 @@ export default function LoginForm({ apiFn }: Props) {
           <Input id="password" type="password" ref={passwordRef} required />
         </div>
         {haveError && (
-          <p className="text-destructive-foreground text-center  text-red-700 bg-red-200 p-1 mx-4 rounded-sm  ">
+          <p className="text-destructive-foreground text-center text-red-700 bg-red-200 p-1 mx-4 rounded-sm  ">
             {errorMessage}
           </p>
         )}
         <Button type="submit" className="w-full">
-          Login
+          Cadastrar
         </Button>
-      </div>
-      <div className="mt-4 text-center text-sm">
-        Não tem conta?
-        <Link href="/signup" className="underline ml-2">
-          Criar Conta
-        </Link>
       </div>
     </form>
   );

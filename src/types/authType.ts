@@ -9,3 +9,8 @@ export interface AuthUser {
 export interface AuthResponse {
   accessToken: string
 }
+
+export interface SignUpResponse{
+  email:string
+  id:number
+}

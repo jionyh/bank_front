@@ -5,3 +5,9 @@ export interface Account {
   accountType: 'CURRENT' | 'SAVINGS'
   balance:number
 }
+
+export interface CreateAccount{
+  name: string
+  accountType: string
+  balance:number
+}

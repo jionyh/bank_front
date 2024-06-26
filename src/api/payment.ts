@@ -3,19 +3,20 @@ import { ErrorResponse } from "@/types/error";
 import { CreatePayment, Payment } from "@/types/payment";
 import { revalidateTag } from "next/cache";
 
-export const create = async (data:CreatePayment):Promise<Payment | ErrorResponse> => {
+export const create = async (data: FormData):Promise<Payment | ErrorResponse> => {
   "use server";
   
   const options = await fetchOptions()
+  console.log(data)
+
   const res = await fetch(`${baseURL}/payment/create`, {
     ...options,
+    headers: {
+      ...options.headers,
+      'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>', // Modify content type for FormData
+    },
     method: "POST",
-    body: JSON.stringify({
-      account_id: parseInt(data.account_id),
-      amount: parseFloat(data.amount),
-      description: data.description,
-      imageUrl: data.imageUrl ? data.imageUrl : undefined
-    }),
+    body:data
   });
 
   const json =  await res.json();

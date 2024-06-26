@@ -1,13 +1,13 @@
 import { ApiFunctions } from "@/types/apiFunctions";
-import { login, me } from "./user";
-import { get as getAccount } from "./account";
+import { login, me, signup } from "./user";
+import { get as getAccount, create as createAccount } from "./account";
 import { get as getReport } from "./report";
-import {create}from './payment'
+import {create as createPayment}from './payment'
 
 const api: ApiFunctions = {
-  account: {get: getAccount},
-  payment:{create},
-  user:{login,me},
+  account: {get: getAccount, create: createAccount},
+  payment:{create:createPayment},
+  user:{login,me, signup},
   report:{
     get: getReport,
   }

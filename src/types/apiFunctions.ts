@@ -1,6 +1,6 @@
 import { ErrorResponse } from '@/types/error';
-import { AuthResponse, UserType } from "./authType";
-import { Account } from "./account";
+import { AuthResponse, SignUpResponse, UserType } from "./authType";
+import { Account, CreateAccount } from "./account";
 import { CreatePayment, Payment } from './payment';
 import { Report, ReportsParams } from './report';
 
@@ -8,12 +8,14 @@ export interface ApiFunctions {
   
   account: {
     get: () => Promise<Account[]>;
+    create:(data:CreateAccount)=>Promise<Account|ErrorResponse>
   };
   payment:{
-    create: (data:CreatePayment)=>Promise<Payment| ErrorResponse>
+    create: (data: FormData)=>Promise<Payment| ErrorResponse>
   }
   user:{
     login:(data:UserType)=>Promise<AuthResponse | ErrorResponse>
+    signup:(data:UserType)=>Promise<SignUpResponse | ErrorResponse>
     me:()=>Promise<any>
   },
   report:{

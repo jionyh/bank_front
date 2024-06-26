@@ -165,7 +165,12 @@ export const ReportForm = ({ accountList, apiFn }: Props) => {
                     </TableCell>
                     <TableCell className="hidden sm:table-cell">R$ {report.amount.toFixed(2)}</TableCell>
                     <TableCell className="hidden sm:table-cell">
-                      <Link className="flex items-center justify-center" href={report.imageUrl ? report.imageUrl : "/"}>
+                      <Link
+                        className={`flex items-center justify-center ${
+                          report.imageUrl !== null ? "" : "cursor-default text-muted-foreground"
+                        }`}
+                        href={report.imageUrl ? report.imageUrl : "/"}
+                      >
                         <ExternalLink />
                       </Link>
                     </TableCell>

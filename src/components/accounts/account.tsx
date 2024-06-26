@@ -1,9 +1,8 @@
 import api from "@/api";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Button } from "../ui/button";
-import { PlusCircle } from "lucide-react";
+import { CreateAccountModal } from "./createAccountModal";
 
 export const AccountComponent = async () => {
   const accountsList = await api.account.get();
@@ -12,10 +11,7 @@ export const AccountComponent = async () => {
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
           <p>Contas</p>
-          <Button className="background bg-green-700 h-7 gap-1">
-            <PlusCircle className="h-3.5 w-3.5" />
-            <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">Adicionar conta</span>
-          </Button>
+          <CreateAccountModal apiFn={api} />
         </CardTitle>
         <CardDescription>Adicione e gerencie suas contas.</CardDescription>
       </CardHeader>
