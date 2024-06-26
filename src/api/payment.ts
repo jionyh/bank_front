@@ -7,13 +7,11 @@ export const create = async (data: FormData):Promise<Payment | ErrorResponse> =>
   "use server";
   
   const options = await fetchOptions()
-  console.log(data)
+  const bearerToken = (options.headers as { [key: string]: string })['Authorization']
 
   const res = await fetch(`${baseURL}/payment/create`, {
-    ...options,
     headers: {
-      ...options.headers,
-      'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>', // Modify content type for FormData
+      Authorization: bearerToken
     },
     method: "POST",
     body:data

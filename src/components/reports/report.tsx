@@ -7,7 +7,9 @@ export const ReportComponent = async () => {
   return (
     <Card x-chunk="dashboard-06-chunk-0">
       <CardHeader>
-        <CardTitle>Relatórios</CardTitle>
+        <CardTitle className="h-10">
+          <p className="text-xl">Relatório</p>
+        </CardTitle>
         <CardDescription></CardDescription>
       </CardHeader>
       <CardContent>

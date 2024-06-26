@@ -9,8 +9,8 @@ export const AccountComponent = async () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="flex items-center justify-between">
-          <p>Contas</p>
+        <CardTitle className="flex h-10 items-start justify-between">
+          <p className="text-xl">Contas</p>
           <CreateAccountModal apiFn={api} />
         </CardTitle>
         <CardDescription>Adicione e gerencie suas contas.</CardDescription>
@@ -31,9 +31,13 @@ export const AccountComponent = async () => {
                   <TableCell className="font-medium">{account.name}</TableCell>
                   <TableCell>
                     {account.accountType === "CURRENT" ? (
-                      <Badge className="bg-green-700">Conta Corrente</Badge>
+                      <Badge className="w-32 bg-green-700 hover:bg-green-700">
+                        <span className=" w-full text-center">Conta Corrente</span>
+                      </Badge>
                     ) : (
-                      <Badge className="bg-blue-700">Conta Poupança</Badge>
+                      <Badge className="w-32 bg-blue-700 hover:bg-blue-700">
+                        <span className=" w-full text-center">Conta Poupança</span>
+                      </Badge>
                     )}
                   </TableCell>
                   <TableCell>R$ {account.balance.toFixed(2)}</TableCell>

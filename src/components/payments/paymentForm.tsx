@@ -35,12 +35,11 @@ export const PaymentForm = ({ accountList, apiFn }: Props) => {
     formData.append("account_id", paymentData.account_id);
     formData.append("amount", paymentData.amount);
     formData.append("description", paymentData.description);
-    if (file) {
+    if (file !== null) {
       formData.append("image", file);
     }
 
     const submitData = await apiFn.payment.create(formData);
-    console.log(submitData);
     if ("error" in submitData) {
       alert(submitData.message);
     } else {

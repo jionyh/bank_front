@@ -7,7 +7,9 @@ export const PaymentComponent = async () => {
   return (
     <Card x-chunk="dashboard-06-chunk-0">
       <CardHeader>
-        <CardTitle>Pagamentos</CardTitle>
+        <CardTitle className="h-10">
+          <p className="text-xl">Pagamentos</p>
+        </CardTitle>
         <CardDescription>Preencha o novo pagamento</CardDescription>
       </CardHeader>
       <CardContent>

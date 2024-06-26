@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { format } from "date-fns";
+import { addDays, format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { Report } from "@/types/report";
 import Link from "next/link";
@@ -34,7 +34,7 @@ export const ReportForm = ({ accountList, apiFn }: Props) => {
     const submitData = await apiFn.report.get({
       account_id: accountId,
       startDate: initialDate?.toISOString(),
-      endDate: finalDate?.toISOString(),
+      endDate: finalDate ? addDays(finalDate, 1).toISOString() : undefined,
     });
     if ("error" in submitData) {
       alert(submitData.message);
